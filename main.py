@@ -15,7 +15,11 @@ def get_invoice_data():
     
     invoice_date = input("Podaj datę wystawienia faktury (RRRR-MM-DD): ")
     
-    return invoice_amount, invoice_currency, invoice_date
+    # Pobranie kursu waluty i obliczenie kwoty w złotówkach
+    exchange_rate = get_exchange_rate(invoice_currency)
+    invoice_amount_pln = invoice_amount * exchange_rate
+    
+    return invoice_amount, invoice_currency, invoice_date, exchange_rate, invoice_amount_pln
 
 def get_payment_data():
     """Funkcja pobierająca informacje o płatnościach od użytkownika."""
@@ -31,7 +35,11 @@ def get_payment_data():
     
     payment_date = input("Podaj datę płatności (RRRR-MM-DD): ")
     
-    return payment_amount, payment_currency, payment_date
+    # Pobranie kursu waluty i obliczenie kwoty w złotówkach
+    exchange_rate = get_exchange_rate(payment_currency)
+    payment_amount_pln = payment_amount * exchange_rate
+    
+    return payment_amount, payment_currency, payment_date, exchange_rate, payment_amount_pln
 
 def get_exchange_rate(currency_code):
     """Funkcja pobierająca kurs waluty z API NBP."""
@@ -57,6 +65,10 @@ def calculate_exchange_difference(amount, currency, payment_date, invoice_date):
 def main():
     invoice_data = get_invoice_data()
     payment_data = get_payment_data()
+    
+    # Wyliczenie kwoty w złotówkach faktury i płatności
+    invoice_amount, invoice_currency, invoice_date, invoice_exchange_rate, invoice_amount_pln = invoice_data
+    payment_amount, payment_currency, payment_date, payment_exchange_rate, payment_amount_pln = payment_data
     
     # Dalsza logika programu, np. obliczenia różnic kursowych i wyświetlanie wyników.
 
