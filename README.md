@@ -2,8 +2,11 @@ CalcEx to prosty program do zarządzania fakturami, który umożliwia użytkowni
 
 Funkcje
 Wprowadzanie faktury: Użytkownik może wprowadzić dane dotyczące faktury, takie jak kwota, waluta i data wystawienia.
+
 Obliczanie różnicy kursowej: Aplikacja oblicza różnicę kursową między kwotą faktury a kwotą płatności, uwzględniając kurs wymiany walut.
+
 Zapisywanie faktur: Wprowadzone faktury są zapisywane do pliku tekstowego w celu późniejszego przeglądu.
+
 Sprawdzanie historii faktur: Użytkownik może przeglądać historię wprowadzonych faktur z pliku.
 
 Instalacja
