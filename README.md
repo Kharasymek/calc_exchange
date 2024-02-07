@@ -1,4 +1,3 @@
-CalcEx - Aplikacja do Zarządzania Fakturami
 CalcEx to prosty program do zarządzania fakturami, który umożliwia użytkownikowi wprowadzanie danych dotyczących faktur, obliczanie różnicy kursowej między kwotą faktury a kwotą płatności oraz przeglądanie historii wprowadzonych faktur.
 
 Funkcje
@@ -35,9 +34,12 @@ python calcex.py
 Korzystanie
 Po uruchomieniu aplikacji użytkownik będzie proszony o wybór jednej z dostępnych opcji:
 
-Wprowadzić fakturę
+Wprowadzić fakturę 
+
 Sprawdzić historię wprowadzonych faktur
+
 Uzyskać Pomoc
+
 Wyjść z programu
 
 Następnie użytkownik będzie prowadzony przez kolejne kroki zgodnie z wybraną opcją.
