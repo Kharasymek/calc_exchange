@@ -1,5 +1,5 @@
-# Main.py
 import requests
+from utilities import save_invoice_to_file
 
 def get_invoice_data():
     """Funkcja pobierająca dane dotyczące faktur od użytkownika."""
@@ -52,16 +52,24 @@ def main():
         if exchange_difference is not None:
             if exchange_difference < 0:
                 print(f"Niedopłata {abs(exchange_difference):.2f} PLN.")
+                discrepancy = f"Niedopłata {abs(exchange_difference):.2f} PLN."
             elif exchange_difference > 0:
                 print(f"Nadpłata {exchange_difference:.2f} PLN.")
+                discrepancy = f"Nadpłata {exchange_difference:.2f} PLN."
             else:
                 print("Faktura opłacona w całości.")
+                discrepancy = "Brak rozbieżności"
+            
+            # Zapisujemy fakturę do pliku wraz z informacją o rozbieżności
+            save_invoice_to_file(invoice_data, payment_data, is_paid=True, discrepancy=discrepancy)
+            
         else:
             print("Nie udało się obliczyć różnicy kursowej.")
         
         next_invoice = input("Czy chcesz przeliczyć kolejną fakturę? (Tak/Nie): ").lower()
         if next_invoice != 'tak':
             break
+
 
 if __name__ == "__main__":
     main()
