@@ -4,7 +4,7 @@ from utilities import save_invoice_to_file
 def welcome_message():
     """Funkcja wyświetlająca powitalne wiadomości."""
     print("\n" * 50)  # Drukuje 50 pustych linii, "przewijając" ekran w górę
-    print("Witaj w programie Calcex!")
+    print("Witaj w programie CalcEx!")
     print("Jestem tutaj, aby pomóc Ci w zarządzaniu fakturami.")
 
 def get_invoice_data():
@@ -95,15 +95,24 @@ def show_invoice_history():
     except Exception as e:
         print(f"Wystąpił błąd podczas odczytu pliku: {e}")
 
+def help_menu():
+    """Funkcja wyświetlająca informacje o funkcjach programu."""
+    print("\nDostępne funkcje programu:")
+    print("1. Wprowadzić fakturę - pozwala użytkownikowi wprowadzić nową fakturę do systemu.")
+    print("2. Sprawdzić historię wprowadzonych faktur - wyświetla listę faktur zapisanych w pliku spis-faktur.txt.")
+    print("3. Pomoc - wyświetla informacje o dostępnych funkcjach programu.")
+    print("4. Wyjść z programu - zamyka program.")
+
 def main():
     welcome_message()
     while True:
         print("\nCo dzisiaj chcesz zrobić?")
         print("1. Wprowadzić fakturę")
         print("2. Sprawdzić historię wprowadzonych faktur")
-        print("3. Wyjść z programu")
+        print("3. Pomoc")
+        print("4. Wyjść z programu")
         
-        choice = input("Wybierz opcję (1/2/3): ")
+        choice = input("Wybierz opcję (1/2/3/4): ")
         
         if choice == '1':
             print("\n" * 50)  # Czyszczenie ekranu przed wywołaniem funkcji wprowadzania faktury
@@ -112,8 +121,11 @@ def main():
             print("\n" * 50)  # Czyszczenie ekranu przed wywołaniem funkcji sprawdzania historii faktur
             show_invoice_history()
         elif choice == '3':
+            print("\n" * 50)  # Czyszczenie ekranu przed wyświetleniem pomocy
+            help_menu()
+        elif choice == '4':
             print("\n" * 50)  # Czyszczenie ekranu przed wyjściem z programu
-            print("Dziękujemy za skorzystanie z programu Calcex. Do zobaczenia!")
+            print("Dziękujemy za skorzystanie z programu CalcEx. Do zobaczenia!")
             break
         else:
             print("Nieprawidłowy wybór. Spróbuj ponownie.")
