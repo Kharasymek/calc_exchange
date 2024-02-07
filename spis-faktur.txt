@@ -56,3 +56,11 @@ Data p³atnoœci: 2023-06-30
 Op³acona: Tak
 Rozbie¿noœæ: Niedop³ata 41.99 PLN.
 
+Faktura 8:
+Kwota faktury: 233.0 PLN
+Data wystawienia: 2023-06-27
+Kwota p³atnoœci: 54.0 EUR
+Data p³atnoœci: 2023-06-29
+Op³acona: Tak
+Rozbie¿noœæ: Nadp³ata 7.67 PLN.
+
