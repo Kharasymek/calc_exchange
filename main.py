@@ -3,7 +3,13 @@ from utilities import save_invoice_to_file
 
 def get_invoice_data():
     """Funkcja pobierająca dane dotyczące faktur od użytkownika."""
-    invoice_amount = float(input("Podaj kwotę faktury: "))
+    while True:
+        try:
+            invoice_amount = float(input("Podaj kwotę faktury: "))
+            break  # Wyjście z pętli jeśli wprowadzono poprawną kwotę
+        except ValueError:
+            print("Podana kwota jest nieprawidłowa. Spróbuj ponownie.")
+    
     invoice_currency = input("Podaj walutę faktury (USD, EUR, GBP, PLN): ").upper()
     invoice_date = input("Podaj datę wystawienia faktury (RRRR-MM-DD): ")
     
@@ -11,7 +17,13 @@ def get_invoice_data():
 
 def get_payment_data():
     """Funkcja pobierająca informacje o płatnościach od użytkownika."""
-    payment_amount = float(input("Podaj kwotę płatności: "))
+    while True:
+        try:
+            payment_amount = float(input("Podaj kwotę płatności: "))
+            break  # Wyjście z pętli jeśli wprowadzono poprawną kwotę
+        except ValueError:
+            print("Podana kwota jest nieprawidłowa. Spróbuj ponownie.")
+    
     payment_currency = input("Podaj walutę płatności (USD, EUR, GBP, PLN): ").upper()
     payment_date = input("Podaj datę płatności (RRRR-MM-DD): ")
     

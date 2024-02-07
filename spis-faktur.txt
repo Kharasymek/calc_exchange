@@ -1,2 +1,18 @@
 
 
+Faktura 1:
+Kwota faktury: 21.37 PLN
+Data wystawienia: 2023-06-27
+Kwota p³atnoœci: 5.0 EUR
+Data p³atnoœci: 2023-06-30
+Op³acona: Tak
+Rozbie¿noœæ: Nadp³ata 0.88 PLN.
+
+Faktura 2:
+Kwota faktury: 21.37 PLN
+Data wystawienia: 2023-06-27
+Kwota p³atnoœci: 5.0 EUR
+Data p³atnoœci: 2023-06-29
+Op³acona: Tak
+Rozbie¿noœæ: Nadp³ata 0.91 PLN.
+
