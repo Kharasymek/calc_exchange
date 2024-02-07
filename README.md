@@ -15,7 +15,7 @@ Aby zainstalować i uruchomić aplikację, wykonaj następujące kroki:
 Sklonuj repozytorium na swój lokalny komputer:
 
 ```
-git clone https://github.com/twoje-konto/calcex.git
+git clone https://github.com/Kharasymek/calc_exchange.git
 ```
 
 Przejdź do katalogu z aplikacją:
