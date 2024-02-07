@@ -21,7 +21,7 @@ git clone https://github.com/Kharasymek/calc_exchange.git
 Przejdź do katalogu z aplikacją:
 
 ```
-cd calcex
+cd calc_exchange
 ```
 Zainstaluj wymagane biblioteki za pomocą pip:
 
@@ -31,7 +31,7 @@ pip install -r requirements.txt
 
 Uruchom aplikację:
 ```
-python calcex.py
+python main.py
 ```
 
 Korzystanie
