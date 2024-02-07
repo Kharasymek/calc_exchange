@@ -1,6 +1,11 @@
 import requests
 from utilities import save_invoice_to_file
-from datetime import datetime
+
+def welcome_message():
+    """Funkcja wyświetlająca powitalne wiadomości."""
+    print("\n" * 50)  # Drukuje 50 pustych linii, "przewijając" ekran w górę
+    print("Witaj w programie Calcex!")
+    print("Jestem tutaj, aby pomóc Ci w zarządzaniu fakturami.")
 
 def get_invoice_data():
     """Funkcja pobierająca dane dotyczące faktur od użytkownika."""
@@ -12,23 +17,9 @@ def get_invoice_data():
             print("Podana kwota jest nieprawidłowa. Spróbuj ponownie.")
     
     invoice_currency = input("Podaj walutę faktury (USD, EUR, GBP, PLN): ").upper()
-    
-    while True:
-        invoice_date = input("Podaj datę wystawienia faktury (RRRR-MM-DD): ")
-        try:
-            # Sprawdzamy czy data ma właściwy format
-            datetime.strptime(invoice_date, "%Y-%m-%d")
-            # Sprawdzamy czy data jest wcześniejsza niż dzisiejsza data
-            if datetime.strptime(invoice_date, "%Y-%m-%d") > datetime.now():
-                print("Data faktury nie może być z przyszłości. Spróbuj ponownie.")
-                continue
-            break  # Wyjście z pętli jeśli wprowadzono poprawną datę
-        except ValueError:
-            print("Nieprawidłowy format daty. Wprowadź datę w formacie RRRR-MM-DD.")
+    invoice_date = input("Podaj datę wystawienia faktury (RRRR-MM-DD): ")
     
     return invoice_amount, invoice_currency, invoice_date
-
-from datetime import datetime
 
 def get_payment_data():
     """Funkcja pobierająca informacje o płatnościach od użytkownika."""
@@ -40,22 +31,9 @@ def get_payment_data():
             print("Podana kwota jest nieprawidłowa. Spróbuj ponownie.")
     
     payment_currency = input("Podaj walutę płatności (USD, EUR, GBP, PLN): ").upper()
-    
-    while True:
-        payment_date = input("Podaj datę płatności (RRRR-MM-DD): ")
-        try:
-            # Sprawdzamy czy data ma właściwy format
-            datetime.strptime(payment_date, "%Y-%m-%d")
-            # Sprawdzamy czy data jest wcześniejsza niż dzisiejsza data
-            if datetime.strptime(payment_date, "%Y-%m-%d") > datetime.now():
-                print("Data płatności nie może być z przyszłości. Spróbuj ponownie.")
-                continue
-            break  # Wyjście z pętli jeśli wprowadzono poprawną datę
-        except ValueError:
-            print("Nieprawidłowy format daty. Wprowadź datę w formacie RRRR-MM-DD.")
+    payment_date = input("Podaj datę płatności (RRRR-MM-DD): ")
     
     return payment_amount, payment_currency, payment_date
-
 
 def get_exchange_rate(currency_code, date):
     if currency_code == 'PLN':
@@ -83,33 +61,62 @@ def calculate_exchange_difference(invoice_amount, invoice_currency, invoice_date
     else:
         return None
 
-def main():
-    while True:
-        invoice_data = get_invoice_data()
-        payment_data = get_payment_data()
-        
-        exchange_difference = calculate_exchange_difference(*invoice_data, *payment_data)
-        if exchange_difference is not None:
-            if exchange_difference < 0:
-                print(f"Niedopłata {abs(exchange_difference):.2f} PLN.")
-                discrepancy = f"Niedopłata {abs(exchange_difference):.2f} PLN."
-            elif exchange_difference > 0:
-                print(f"Nadpłata {exchange_difference:.2f} PLN.")
-                discrepancy = f"Nadpłata {exchange_difference:.2f} PLN."
-            else:
-                print("Faktura opłacona w całości.")
-                discrepancy = "Brak rozbieżności"
-            
-            # Zapisujemy fakturę do pliku wraz z informacją o rozbieżności
-            save_invoice_to_file(invoice_data, payment_data, is_paid=True, discrepancy=discrepancy)
-            
+def enter_invoice():
+    """Funkcja do wprowadzania faktury."""
+    invoice_data = get_invoice_data()
+    payment_data = get_payment_data()
+    
+    exchange_difference = calculate_exchange_difference(*invoice_data, *payment_data)
+    if exchange_difference is not None:
+        if exchange_difference < 0:
+            print(f"Niedopłata {abs(exchange_difference):.2f} PLN.")
+            discrepancy = f"Niedopłata {abs(exchange_difference):.2f} PLN."
+        elif exchange_difference > 0:
+            print(f"Nadpłata {exchange_difference:.2f} PLN.")
+            discrepancy = f"Nadpłata {exchange_difference:.2f} PLN."
         else:
-            print("Nie udało się obliczyć różnicy kursowej.")
+            print("Faktura opłacona w całości.")
+            discrepancy = "Brak rozbieżności"
         
-        next_invoice = input("Czy chcesz przeliczyć kolejną fakturę? (Tak/Nie): ").lower()
-        if next_invoice != 'tak':
-            break
+        # Zapisujemy fakturę do pliku wraz z informacją o rozbieżności
+        save_invoice_to_file(invoice_data, payment_data, is_paid=True, discrepancy=discrepancy)
+        
+    else:
+        print("Nie udało się obliczyć różnicy kursowej.")
 
+def show_invoice_history():
+    """Funkcja do wyświetlania historii wprowadzonych faktur."""
+    try:
+        with open("spis-faktur.txt", "r") as file:
+            print("Historia wprowadzonych faktur:")
+            print(file.read())
+    except FileNotFoundError:
+        print("Nie znaleziono pliku spis-faktur.txt.")
+    except Exception as e:
+        print(f"Wystąpił błąd podczas odczytu pliku: {e}")
+
+def main():
+    welcome_message()
+    while True:
+        print("\nCo dzisiaj chcesz zrobić?")
+        print("1. Wprowadzić fakturę")
+        print("2. Sprawdzić historię wprowadzonych faktur")
+        print("3. Wyjść z programu")
+        
+        choice = input("Wybierz opcję (1/2/3): ")
+        
+        if choice == '1':
+            print("\n" * 50)  # Czyszczenie ekranu przed wywołaniem funkcji wprowadzania faktury
+            enter_invoice()
+        elif choice == '2':
+            print("\n" * 50)  # Czyszczenie ekranu przed wywołaniem funkcji sprawdzania historii faktur
+            show_invoice_history()
+        elif choice == '3':
+            print("\n" * 50)  # Czyszczenie ekranu przed wyjściem z programu
+            print("Dziękujemy za skorzystanie z programu Calcex. Do zobaczenia!")
+            break
+        else:
+            print("Nieprawidłowy wybór. Spróbuj ponownie.")
 
 if __name__ == "__main__":
     main()

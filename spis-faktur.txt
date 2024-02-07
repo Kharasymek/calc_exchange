@@ -32,3 +32,27 @@ Data p³atnoœci: 2023-08-10
 Op³acona: Tak
 Rozbie¿noœæ: Nadp³ata 289.23 PLN.
 
+Faktura 5:
+Kwota faktury: 2123.0 PLN
+Data wystawienia: 2023-06-29
+Kwota p³atnoœci: 5.0 GBP
+Data p³atnoœci: 2023-07-04
+Op³acona: Tak
+Rozbie¿noœæ: Niedop³ata 2097.21 PLN.
+
+Faktura 6:
+Kwota faktury: 23.0 PLN
+Data wystawienia: 2023-02-27
+Kwota p³atnoœci: 5.0 EUR
+Data p³atnoœci: 2023-03-10
+Op³acona: Tak
+Rozbie¿noœæ: Nadp³ata 0.42 PLN.
+
+Faktura 7:
+Kwota faktury: 220.0 PLN
+Data wystawienia: 2023-06-27
+Kwota p³atnoœci: 40.0 EUR
+Data p³atnoœci: 2023-06-30
+Op³acona: Tak
+Rozbie¿noœæ: Niedop³ata 41.99 PLN.
+
