@@ -1,5 +1,6 @@
 import requests
 from utilities import save_invoice_to_file
+from datetime import datetime
 
 def get_invoice_data():
     """Funkcja pobierająca dane dotyczące faktur od użytkownika."""
@@ -11,9 +12,23 @@ def get_invoice_data():
             print("Podana kwota jest nieprawidłowa. Spróbuj ponownie.")
     
     invoice_currency = input("Podaj walutę faktury (USD, EUR, GBP, PLN): ").upper()
-    invoice_date = input("Podaj datę wystawienia faktury (RRRR-MM-DD): ")
+    
+    while True:
+        invoice_date = input("Podaj datę wystawienia faktury (RRRR-MM-DD): ")
+        try:
+            # Sprawdzamy czy data ma właściwy format
+            datetime.strptime(invoice_date, "%Y-%m-%d")
+            # Sprawdzamy czy data jest wcześniejsza niż dzisiejsza data
+            if datetime.strptime(invoice_date, "%Y-%m-%d") > datetime.now():
+                print("Data faktury nie może być z przyszłości. Spróbuj ponownie.")
+                continue
+            break  # Wyjście z pętli jeśli wprowadzono poprawną datę
+        except ValueError:
+            print("Nieprawidłowy format daty. Wprowadź datę w formacie RRRR-MM-DD.")
     
     return invoice_amount, invoice_currency, invoice_date
+
+from datetime import datetime
 
 def get_payment_data():
     """Funkcja pobierająca informacje o płatnościach od użytkownika."""
@@ -25,9 +40,22 @@ def get_payment_data():
             print("Podana kwota jest nieprawidłowa. Spróbuj ponownie.")
     
     payment_currency = input("Podaj walutę płatności (USD, EUR, GBP, PLN): ").upper()
-    payment_date = input("Podaj datę płatności (RRRR-MM-DD): ")
+    
+    while True:
+        payment_date = input("Podaj datę płatności (RRRR-MM-DD): ")
+        try:
+            # Sprawdzamy czy data ma właściwy format
+            datetime.strptime(payment_date, "%Y-%m-%d")
+            # Sprawdzamy czy data jest wcześniejsza niż dzisiejsza data
+            if datetime.strptime(payment_date, "%Y-%m-%d") > datetime.now():
+                print("Data płatności nie może być z przyszłości. Spróbuj ponownie.")
+                continue
+            break  # Wyjście z pętli jeśli wprowadzono poprawną datę
+        except ValueError:
+            print("Nieprawidłowy format daty. Wprowadź datę w formacie RRRR-MM-DD.")
     
     return payment_amount, payment_currency, payment_date
+
 
 def get_exchange_rate(currency_code, date):
     if currency_code == 'PLN':
